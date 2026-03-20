@@ -38,10 +38,10 @@ oauth.register(
 async def login_with_azure(request: Request):
     request.session.clear()
     redirect_uri = request.url_for("authorize_azure")
-    if os.getenv("FLASK_ENV", "development") == "development":
-        redirect_uri = str(redirect_uri).replace("https://", "http://")
-    else:
-        redirect_uri = str(redirect_uri).replace("http://", "https://")
+    # if os.getenv("FLASK_ENV", "development") == "development":
+    #     redirect_uri = str(redirect_uri).replace("https://", "http://")
+    # else:
+    redirect_uri = str(redirect_uri).replace("http://", "https://")
     return await oauth.azure.authorize_redirect(request, redirect_uri)
 
 @router.get("/login/azure/authorize")
